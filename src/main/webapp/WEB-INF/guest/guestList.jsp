@@ -62,14 +62,14 @@
 	    <!-- 블록페이지 시작 -->       
 			<div class="text-center mt-5 mb-5">
 			  <c:if test="${pag > 1}"><a href="GuestList.gu?pag=1&pageSize=${pageSize}" class="btn btn-sm btn-light border">첫페이지</a></c:if>
-			  <c:if test="${curBlock > 0}"><a href="GuestList.gu?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}" class="btn btn-light btn-sm border"><</a></c:if>
+			  <c:if test="${curBlock > 0}"><a href="GuestList.gu?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}" class="btn btn-light btn-sm border">◀</a></c:if>
 			  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize) + blockSize}" varStatus="st">
 			    <c:if test="${i <= totPage}">
 			    	<c:if test="${pag==i}"><a href="GuestList.gu?pag=${i}&pageSize=${pageSize}" class="btn btn-primary btn-sm border">${i}</a></c:if>
 			  		<c:if test="${pag!=i}"><a href="GuestList.gu?pag=${i}&pageSize=${pageSize}" class="btn btn-light btn-sm border">${i}</a></c:if>
 			  	</c:if>
 			  </c:forEach>
-			  <c:if test="${curBlock < lastBlock}"><a href="GuestList.gu?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}" class="btn btn-light btn-sm border">></a></c:if>
+			  <c:if test="${curBlock < lastBlock}"><a href="GuestList.gu?pag=${(curBlock+1)*blockSize+1}&pageSize=${pageSize}" class="btn btn-light btn-sm border">▶</a></c:if>
 			  <c:if test="${pag < totPage}"><a href="GuestList.gu?pag=${totPage}&pageSize=${pageSize}" class="btn btn-sm btn-light border">마지막페이지</a></c:if>
 			  
 			</div>

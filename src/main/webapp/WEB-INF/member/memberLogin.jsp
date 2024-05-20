@@ -48,7 +48,7 @@
           <div class="col-lg-6 mb-5">
               <div class="bg-light p-30">
                   <div id="success"></div>
-                  <form name="myform" id="myform method="post" action="MemberLoginOk.mem" novalidate="novalidate">
+                  <form name="myform" id="myform" method="post" action="MemberLoginOk.mem" novalidate="novalidate">
                       <div class="control-group">
                           <input type="text" class="form-control" id="mid" name="mid" placeholder="Your Id" value="${mid}"
                               required="required" data-validation-required-message="Please enter your id" />

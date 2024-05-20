@@ -100,7 +100,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		session.setAttribute("strLevel", strLevel);
 		
 		request.setAttribute("message", mid+"님 로그인 되셨습니다.");
-		request.setAttribute("url", request.getContextPath()+"/Main");
+		request.setAttribute("url", "MemberMain.mem");
 	}
 
 }

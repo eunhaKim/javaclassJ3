@@ -81,7 +81,7 @@
 				tel = tel1 + "-" + tel2 + "-" + tel3;
 			}
 			
-    	
+	    	
     	if(idCheckSw == 0) {
     		alert("아이디 중복체크버튼을 눌러주세요");
     		document.getElementById("midBtn").focus();
@@ -157,6 +157,7 @@
     	}
     }
     
+    
     $(function(){
     	$("#mid").on("blur", () => {
     		idCheckSw = 0;
@@ -167,6 +168,35 @@
     	});
     	
     });
+    
+ 		// 파일 업로드 체크 & 선택된 그림 미리보기 
+    function imgCheck(e) {
+			let fName = document.getElementById("file").value;
+			
+			let maxSize = 1024 * 1024 * 2;	// 기본 단위 : Byte,   1024 * 1024 * 10 = 10MByte 허용
+			let ext = fName.substring(fName.lastIndexOf(".")+1).toLowerCase();
+			
+			let fileSize = document.getElementById("file").files[0].size;
+			if(fileSize > maxSize) {
+				alert("업로드할 파일의 최대용량은 2MByte입니다.");
+				document.getElementById("file").value="";
+				return false;
+			}
+			else if(ext != 'jpg' && ext != 'gif' && ext != 'png') {
+				alert("업로드 가능한 파일은 'jpg/gif/png'만 가능합니다.");
+				document.getElementById("file").value="";
+				return false;
+			}
+			else{
+	    	if(e.files && e.files[0]) {
+	    		let reader = new FileReader();
+	    		reader.onload = function(e) {
+	    			document.getElementById("demoImg").src = e.target.result;
+	    		}
+	    		reader.readAsDataURL(e.files[0]);
+	    	}
+			}
+    }
   </script>
 </head>
 <body>
@@ -193,7 +223,7 @@
       <div class="row px-xl-5">
           <div class="col-lg-6 mb-5">
               <div class="bg-light p-30">
-                  <form name="myform" method="post" action="${ctp}/MemberJoinOk.mem" class="was-validated">
+                  <form name="myform" method="post" action="${ctp}/MemberJoinOk.mem" class="was-validated" enctype="multipart/form-data">
 								    <div class="form-group">
 								      <label for="mid">아이디 : &nbsp; &nbsp;<input type="button" value="아이디 중복체크" id="midBtn" class="btn btn-primary btn-sm" onclick="idCheck()"/></label>
 								      <input type="text" class="form-control" name="mid" id="mid" placeholder="아이디를 입력하세요." required autofocus/>
@@ -360,7 +390,8 @@
 								    </div>
 								    <div  class="form-group">
 								      회원 사진(파일용량:2MByte이내) :
-								      <input type="file" name="fName" id="file" class="form-control-file border"/>
+								      <input type="file" name="fName" id="file" onchange="imgCheck(this)" class="form-control-file border" />
+								       <img id="demoImg" width="200px"/>
 								    </div>
 								    <button type="button" class="btn btn-secondary" onclick="fCheck()">회원가입</button> &nbsp;
 								    <button type="reset" class="btn btn-secondary">다시작성</button> &nbsp;

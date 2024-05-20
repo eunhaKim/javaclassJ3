@@ -1,7 +1,6 @@
 package guest;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class GuestInputOkCommand implements GuestInterface {
 		
 		int res = dao.setGuestInput(vo);
 		
-		PrintWriter out = response.getWriter();
+		// PrintWriter out = response.getWriter();
 		
 		if(res != 0) {
 			request.setAttribute("message", "방명록에 글이 등록되었습니다.");
