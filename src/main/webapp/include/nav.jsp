@@ -44,11 +44,11 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="${ctp}/Main" class="nav-item nav-link">Home</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Community <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="BoardMain.bo" class="nav-link dropdown-toggle" data-toggle="dropdown">Community <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                <a href="#" class="dropdown-item">영화 소식</a>
-                                <a href="#" class="dropdown-item">영화 추천</a>
-                                <a href="#" class="dropdown-item">같이 영화보러가요</a>
+                                <a href="BoardList.bo?bName=movieNews" class="dropdown-item">영화 소식</a>
+                                <a href="BoardList.bo?bName=movieRecommend" class="dropdown-item">영화 추천</a>
+                                <a href="BoardList.bo?bName=movieTogether" class="dropdown-item">같이 영화보러가요</a>
                             </div>
                         </div>
                         <!--  <a href="shop.html" class="nav-item nav-link">Shop</a> -->

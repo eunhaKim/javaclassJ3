@@ -1,62 +1,39 @@
 package guest;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import common.GetConn;
+
 public class GuestDAO {
-	private Connection conn = null;
+
+	private Connection conn = GetConn.getConn();
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	String sql = "";
-	GuestVO vo = null;
+	private String sql = "";
+	private GuestVO vo = null;
 	
-	public GuestDAO() {
-		String url = "jdbc:mysql://localhost:3306/javaclass";
-//		String url = "jdbc:mysql://localhost:3306/testDB?useUnicode=true&charset=UTF8mb4";
-		String user = "root";
-		String password = "1234";
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 검색 실패~~" + e.getMessage());
-		} catch (SQLException e) {
-			System.out.println("DB연동 실패~~");
-		}
-	}
-	
-	// conn객체 반납
-	public void connClose() {
-		if(conn != null) {
-			try {
-				conn.close();
-			} catch (SQLException e) {}
-		}
-	}
-	
-	// pstmt 반납
 	public void pstmtClose() {
 		if(pstmt != null) {
 			try {
 				pstmt.close();
-			} catch (SQLException e) {}
+			} catch (Exception e) {}
 		}
 	}
 	
-	// rs 반납
 	public void rsClose() {
 		if(rs != null) {
 			try {
 				rs.close();
-			} catch (SQLException e) {}
+			} catch (Exception e) {} 
+			finally {
+				pstmtClose();
+			}
 		}
-		pstmtClose();
 	}
 
 	// 방명록 전체 자료 리스트 처리
