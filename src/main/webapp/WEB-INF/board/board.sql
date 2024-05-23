@@ -21,5 +21,5 @@ create table movieRecommend (
 drop table  movieRecommend;
 desc  movieRecommend;
 
-insert into  movieRecommend values (default,'admin','게시판 서비스를 시작합니다.','즐거운 게시판생활이 되세요.',default,'192.168.50.20',default,default,default);
+insert into  movieRecommend values (default,'admin','게시판 서비스를 시작합니다.','즐거운 게시판생활이 되세요.',default,'192.168.50.70',default,default,default,'noimage.jpg','','','');
 select * from movieRecommend; 
