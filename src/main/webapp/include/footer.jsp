@@ -18,6 +18,7 @@
                         <a class="text-secondary mb-2" href="https://www.w3schools.com/bootstrap4/" target="_blank"><i class="fa fa-angle-right mr-2"></i>Bootstrap 4</a>
                         <a class="text-secondary mb-2" href="https://fontawesome.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>Fontawesome</a>
                         <a class="text-secondary mb-2" href="https://www.dbcut.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>DBCUT(벤치마킹)</a>
+                        <a class="text-secondary mb-2" href="https://icon-icons.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>아이콘다운로드</a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
@@ -26,7 +27,7 @@
                         <a class="text-secondary mb-2" href="https://cafe.daum.net/javaspring" target="_blank"><i class="fa fa-angle-right mr-2"></i>javaspring 다음카페</a>
                         <a class="text-secondary mb-2" href="https://www.w3schools.com/bootstrap4/" target="_blank"><i class="fa fa-angle-right mr-2"></i>Bootstrap 4</a>
                         <a class="text-secondary mb-2" href="https://fontawesome.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>Fontawesome</a>
-                        <a class="text-secondary mb-2" href="https://www.dbcut.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>DBCUT(벤치마킹)</a>
+                        <a class="text-secondary mb-2" href="https://www.dbcut.com/ko" target="_blank"><i class="fa fa-angle-right mr-2"></i>DBCUT(벤치마킹)</a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
