@@ -20,6 +20,8 @@ public class BoardController extends HttpServlet{
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
+		String bName = request.getParameter("bName")==null ? "" : request.getParameter("bName");
+		
 		// 인증....처리.....
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 999 : (int) session.getAttribute("sLevel");
@@ -33,6 +35,15 @@ public class BoardController extends HttpServlet{
 			command = new BoardListCommand();
 			command.execute(request, response);
 			viewPage += "/boardList.jsp";
+		}
+		else if(com.equals("/BoardInput")) {
+			request.setAttribute("bName", bName);
+			viewPage += "/boardInput.jsp";
+		}
+		else if(com.equals("/BoardInputOk")) {
+			command = new BoardInputOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

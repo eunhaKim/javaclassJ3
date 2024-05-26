@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Pagination;
+
 public class BoardListCommand implements BoardInterface {
 
 	@Override
@@ -22,8 +24,9 @@ public class BoardListCommand implements BoardInterface {
 		
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")==null ? 10 : Integer.parseInt(request.getParameter("pageSize"));
+		String bName = request.getParameter("bName")==null? "" : request.getParameter("bName");
 		
-//		Pagination.pageChange(request, pag, pageSize, contentsShow, "board", "");
+		Pagination.pageChange(request, pag, pageSize, contentsShow, bName, "");
 	}
 
 }
