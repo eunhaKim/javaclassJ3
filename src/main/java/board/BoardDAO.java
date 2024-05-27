@@ -150,10 +150,10 @@ public class BoardDAO {
 	}
 
 	// 게시글 내용보기
-	public BoardVO getBoardContent(int idx) {
+	public BoardVO getBoardContent(String bName, int idx) {
 		BoardVO vo = new BoardVO();
 		try {
-			sql = "select * from board where idx = ?";
+			sql = "select * from "+ bName +" where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
@@ -168,6 +168,8 @@ public class BoardDAO {
 				vo.setHostIp(rs.getString("hostIp"));
 				vo.setwDate(rs.getString("wDate"));
 				vo.setGood(rs.getInt("good"));
+				vo.setListImg(rs.getString("listImg"));
+				vo.setListImgfSName(rs.getString("listImgfSName"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
@@ -178,9 +180,9 @@ public class BoardDAO {
 	}
 
 	// 조회수 증가처리
-	public void setBoardReadNumPlus(int idx) {
+	public void setBoardReadNumPlus(String bName, int idx) {
 		try {
-			sql = "update board set readNum = readNum + 1 where idx = ?";
+			sql = "update "+ bName +" set readNum = readNum + 1 where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
@@ -248,11 +250,11 @@ public class BoardDAO {
 	}
 
 	// 이전글/다음글 idx,title가져오기
-	public BoardVO getPreNextSearch(int idx, String str) {
+	public BoardVO getPreNextSearch(String bName, int idx, String str) {
 		BoardVO vo = new BoardVO();
 		try {
-			if(str.equals("preVo")) sql = "select idx, title from board where idx < ? order by idx desc limit 1";
-			else sql = "select idx, title from board where idx > ? order by idx limit 1";
+			if(str.equals("preVo")) sql = "select idx, title from "+ bName +" where idx < ? order by idx desc limit 1";
+			else sql = "select idx, title from "+ bName +" where idx > ? order by idx limit 1";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);

@@ -74,7 +74,7 @@
         		<div class="row">
         			<div class="input-group col-xs-12">
 	        			<label for="nickName" class="input-group-addon fhead">글쓴이</label>
-	        			<input type="text" class="form-control" name="nickName" id="nickName" value="${sNickName}"/>
+	        			<input type="text" class="form-control" name="nickName" id="nickName" value="${sNickName}" readonly/>
         			</div>
         		</div>
         		<div class="row">

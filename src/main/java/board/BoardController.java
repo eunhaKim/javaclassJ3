@@ -45,6 +45,11 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
+		else if(com.equals("/BoardContent")) {
+			command = new BoardContentCommand();
+			command.execute(request, response);
+			viewPage += "/boardContent.jsp?bName="+bName;
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);		

@@ -23,6 +23,22 @@
   		$("#myModal #modalNickName").text(nickName);
   		$("#myModal #modalIdx").text(idx);
   	}
+  	
+ 		// 좋아요 처리(중복불허)
+    function goodCheck() {
+    	$.ajax({
+    		url  : "BoardGoodCheck.bo",
+    		type : "post",
+    		data : {idx : ${vo.idx}},
+    		success:function(res) {
+    			if(res != "0") location.reload();
+    			else alert("이미 좋아요 버튼을 클릭하셨습니다.");
+    		},
+    		error : function() {
+    			alert("전송오류");
+    		}
+    	});
+    }
   </script>
 </head>
 <body>
@@ -71,10 +87,9 @@
 	          <div class="product-img position-relative overflow-hidden text-center" style="height:240px;background:#e9e9e9">
               <img class="img-fluid h-100" src="${ctp}/images/board/${vo.listImgfSName}" alt="${curScrStartNo}번글 리스트 이미지">
               <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" href="">${curScrStartNo}</a>
-                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                <a class="btn btn-outline-dark btn-square" href="BoardContent.bo?bName=${bName}&idx=${vo.idx}" title="게시글번호 : ${curScrStartNo}">${curScrStartNo}</a>
+                <a class="btn btn-outline-dark btn-square" href="javascript:goodCheck()" title="좋아요 추가하기"><i class="far fa-heart"></i></a>
+                <a class="btn btn-outline-dark btn-square" href="BoardContent.bo?bName=${bName}&idx=${vo.idx}" title="게시글보기"><i class="fa-regular fa-eye"></i></a>
               </div>
 	          </div>
 	          <div class="text-center py-4">

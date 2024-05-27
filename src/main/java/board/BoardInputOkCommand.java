@@ -58,7 +58,6 @@ public class BoardInputOkCommand implements BoardInterface {
 		vo.setListImg(oFileName==""?"noimage.jpg":oFileName);
 		vo.setListImgfSName(fSName==""?"noimage.jpg":fSName);
 		vo.setHostIp(hostIp);
-		System.out.println(vo);
 		
 		BoardDAO dao = new BoardDAO();
 		int res = dao.setBoardInput(bName,vo);
