@@ -25,11 +25,14 @@
   	}
   	
  		// 좋아요 처리(중복불허)
-    function goodCheck() {
+    function goodCheck(idx) {
     	$.ajax({
     		url  : "BoardGoodCheck.bo",
     		type : "post",
-    		data : {idx : ${vo.idx}},
+    		data : {
+    			bName : '${bName}',
+    			idx : idx
+    		},
     		success:function(res) {
     			if(res != "0") location.reload();
     			else alert("이미 좋아요 버튼을 클릭하셨습니다.");
@@ -51,14 +54,14 @@
       <nav class="breadcrumb bg-light mb-30">
         <a class="breadcrumb-item text-dark" href="${ctp}/Main">Home</a>
         <a class="breadcrumb-item text-dark">Community</a>
-        <span class="breadcrumb-item active">${bName}</span>
+        <a href="BoardList.bo?bName=${bName}" class="breadcrumb-item active">${bTextName}</a>
       </nav>
     </div>
   </div>
 </div>
 <!-- Breadcrumb End -->
 <div class="container-fluid">
-	<h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">영화추천</span></h2>
+	<h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">${bTextName}</span></h2>
 	<div class="row px-xl-5">
     <!-- List Start -->
     <div class="col-lg-9 col-md-8">
@@ -66,7 +69,7 @@
         <div class="col-12 pb-1">
           <div class="d-flex align-items-center justify-content-between mb-4">
 	          <div>
-	            <c:if test="${sLevel != 1}"><a href="BoardInput.bo?bName=${bName}" class="btn btn-success btn-sm">글쓰기</a></c:if>
+	            <c:if test="${sLevel < 4}"><a href="BoardInput.bo?bName=${bName}" class="btn btn-success btn-sm">글쓰기</a></c:if>
 	          </div>
 		        <div class="ml-2">
 			        <select name="pageSize" id="pageSize" onchange="pageSizeCheck()">
@@ -88,24 +91,25 @@
               <img class="img-fluid h-100" src="${ctp}/images/board/${vo.listImgfSName}" alt="${curScrStartNo}번글 리스트 이미지">
               <div class="product-action">
                 <a class="btn btn-outline-dark btn-square" href="BoardContent.bo?bName=${bName}&idx=${vo.idx}" title="게시글번호 : ${curScrStartNo}">${curScrStartNo}</a>
-                <a class="btn btn-outline-dark btn-square" href="javascript:goodCheck()" title="좋아요 추가하기"><i class="far fa-heart"></i></a>
-                <a class="btn btn-outline-dark btn-square" href="BoardContent.bo?bName=${bName}&idx=${vo.idx}" title="게시글보기"><i class="fa-regular fa-eye"></i></a>
+                <c:if test="${sLevel < 4}"><a class="btn btn-outline-dark btn-square" href="javascript:goodCheck(${vo.idx})" title="좋아요 추가하기"><i class="far fa-heart"></i></a></c:if>
+                <a class="btn btn-outline-dark btn-square" href="BoardContent.bo?bName=${bName}&idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}" title="게시글보기"><i class="fa-regular fa-eye"></i></a>
               </div>
 	          </div>
 	          <div class="text-center py-4">
-              <a href="BoardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}" class="h6 text-decoration-none text-truncate">${vo.title}</a>
+              <a href="BoardContent.bo?bName=${bName}&idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}" class="h5 text-decoration-none text-truncate" title="${vo.title}">${fn:substring(vo.title,0,10)}</a>
+              <c:if test="${fn:length(vo.title) >= 10 }">..</c:if>
 			        <c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif" /></c:if>  
 			        <c:if test="${vo.replyCnt != 0}">(${vo.replyCnt})</c:if>
               <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5><i class="fa-solid fa-user text-primary mr-3"></i>${vo.nickName}</h5>
+                <h6><i class="fa-solid fa-user text-primary mr-2"></i>${vo.nickName}</h6>
                 <c:if test="${sLevel == 0}">
-				          <a href="#" onclick="modalCheck('${vo.idx}','${vo.hostIp}','${vo.mid}','${vo.nickName}')" data-toggle="modal" data-target="#myModal" class="badge badge-success">more</a>
+				          <a href="#" onclick="modalCheck('${vo.idx}','${vo.hostIp}','${vo.mid}','${vo.nickName}')" data-toggle="modal" data-target="#myModal" class="badge badge-success ml-2 mb-2">more</a>
 				        </c:if>
               </div>
               <div class="d-flex align-items-center justify-content-center mb-1">
                 <!-- 1일(24시간) 이내는 시간만 표시(10:43), 이후는 날짜와 시간을 표시 : 2024-05-14 10:43 -->
                 <small>${vo.date_diff == 0 ? fn:substring(vo.wDate,11,19) : fn:substring(vo.wDate,0,10)}</small>
-                <small>(조회수: ${vo.readNum}, 좋아요: ${vo.good})</small>
+                <small class="ml-2">(조회수: ${vo.readNum}, 좋아요: ${vo.good})</small>
               </div>
 	          </div>	
 		      </div>

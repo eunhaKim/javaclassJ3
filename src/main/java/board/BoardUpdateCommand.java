@@ -1,14 +1,12 @@
 package board;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class BoardContentCommand implements BoardInterface {
+public class BoardUpdateCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,31 +14,13 @@ public class BoardContentCommand implements BoardInterface {
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		int pag = request.getParameter("pag")==null ? 0 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")==null ? 0 : Integer.parseInt(request.getParameter("pageSize"));
-		String flag = request.getParameter("flag")==null ? "" : request.getParameter("flag");
-		String search = request.getParameter("search")==null ? "" : request.getParameter("search");
-		String searchString = request.getParameter("searchString")==null ? "" : request.getParameter("searchString");
 		
 		BoardDAO dao = new BoardDAO();
-		
-		// 게시글 조회수 1씩 증가시키기(중복방지)
-		HttpSession session = request.getSession();
-		ArrayList<String> contentReadNum = (ArrayList<String>) session.getAttribute("sContentIdx");
-		if(contentReadNum == null) contentReadNum = new ArrayList<String>();
-		String imsiContentReadNum = "board" + idx;
-		if(!contentReadNum.contains(imsiContentReadNum)) {
-			dao.setBoardReadNumPlus(bName, idx);
-			contentReadNum.add(imsiContentReadNum);
-		}
-		session.setAttribute("sContentIdx", contentReadNum);
 		BoardVO vo = dao.getBoardContent(bName, idx);
 		request.setAttribute("vo", vo);
 		request.setAttribute("bName", bName);
 		request.setAttribute("pag", pag);
 		request.setAttribute("pageSize", pageSize);
-		
-		
-		
-		
 	}
 
 }

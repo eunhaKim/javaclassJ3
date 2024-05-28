@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<c:set var="ctp" value="${pageContext.request.contextPath}" />
+<%
+  int level = session.getAttribute("sLevel")==null ? 999 : (int) session.getAttribute("sLevel");
+  pageContext.setAttribute("level", level);
+%>
 <!-- Navbar Start -->
 <div class="container-fluid bg-dark mb-30 sticky-top">
     <div class="row px-xl-5">
@@ -54,30 +58,27 @@
                         <!--  <a href="shop.html" class="nav-item nav-link">Shop</a> -->
                         <a href="#" class="nav-item nav-link">Contact</a>
                         <a href="GuestList.gu" class="nav-item nav-link">방명록</a>
+                        
                         <div class="nav-item dropdown">
-	                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">
-	                        	<c:if test="${level > 4}">로그인 </c:if>
-	                        	<c:if test="${level <= 4}">My Account </c:if>
-	                        	<i class="fa fa-angle-down mt-1"></i>
-	                        </a>
-	                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-	                        	<c:if test="${level > 4}">
-	                            <a href="MemberLogin.mem" class="dropdown-item">로그인</a>
-	                            <a href="MemberJoin.mem" class="dropdown-item">회원가입</a>
-	                          </c:if>
-	                          <c:if test="${level <= 4}">
-	                            <a href="MemberMain.mem" class="dropdown-item">회원정보</a>
-			                      	<a href="MemberPwdCheck.mem" class="dropdown-item">회원정보수정</a>
-	                            <a href="MemberLogout.mem" class="dropdown-item">로그아웃</a>
-			                      	<a href="MemberDelete.mem" class="dropdown-item">회원탈퇴</a>
-	                          </c:if>
-	                          <c:if test="${level == 0}">
-	                          	<hr/>
-	                          	<a href="MemberList.mem" class="dropdown-item">회원리스트</a>
-	                    				<a href="AdminMain.ad" class="dropdown-item">관리자메뉴</a>
-	                          </c:if>
-	                        </div>
-		                    </div>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">My Account <i class="fa fa-angle-down mt-1"></i></a>
+                            <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                <c:if test="${level > 4}">
+			                            <a href="MemberLogin.mem" class="dropdown-item">로그인</a>
+			                            <a href="MemberJoin.mem" class="dropdown-item">회원가입</a>
+			                          </c:if>
+			                          <c:if test="${level <= 4}">
+			                            <a href="MemberMain.mem" class="dropdown-item">회원정보</a>
+					                      	<a href="MemberPwdCheck.mem" class="dropdown-item">회원정보수정</a>
+			                            <a href="MemberLogout.mem" class="dropdown-item">로그아웃</a>
+					                      	<a href="MemberDelete.mem" class="dropdown-item">회원탈퇴</a>
+			                          </c:if>
+			                          <c:if test="${level == 0}">
+			                          	<hr/>
+			                          	<a href="MemberList.mem" class="dropdown-item">회원리스트</a>
+			                    				<a href="AdminMain.ad" class="dropdown-item">관리자메뉴</a>
+			                          </c:if>
+                            </div>
+                        </div>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">

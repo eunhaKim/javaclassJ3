@@ -131,7 +131,7 @@ public class BoardDAO {
 	public int setBoardInput(String bName, BoardVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into "+ bName +" values (default,?,?,?,?,default,?,default,default,default,?,?,default,default)";
+			sql = "insert into "+ bName +" values (default,?,?,?,?,default,?,default,default,default,?,?,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getNickName());
@@ -170,6 +170,7 @@ public class BoardDAO {
 				vo.setGood(rs.getInt("good"));
 				vo.setListImg(rs.getString("listImg"));
 				vo.setListImgfSName(rs.getString("listImgfSName"));
+				vo.setOpenSw(rs.getString("openSw"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
@@ -194,10 +195,11 @@ public class BoardDAO {
 	}
 
 	// 게시글 삭제하기
-	public int setBoardDelete(int idx) {
+	public int setBoardDelete(String bName, int idx) {
 		int res = 0;
 		try {
-			sql = "delete from board where idx = ?";
+			sql = "delete from "+ bName +" where idx = ?";
+			System.out.println(sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			res = pstmt.executeUpdate();
@@ -273,10 +275,10 @@ public class BoardDAO {
 	}
 
 	// 좋아요수 증가처리
-	public int setBoardGoodCheck(int idx) {
+	public int setBoardGoodCheck(String bName, int idx) {
 		int res = 0;
 		try {
-			sql = "update board set good = good + 1 where idx = ?";
+			sql = "update "+ bName +" set good = good + 1 where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			res = pstmt.executeUpdate();
@@ -304,15 +306,18 @@ public class BoardDAO {
 	}
 
 	// 게시글 수정하기
-	public int setBoardUpdateOk(BoardVO vo) {
+	public int setBoardUpdateOk(String bName, BoardVO vo) {
 		int res = 0;
 		try {
-			sql = "update board set title=?, content=?, openSw=?, hostIp=?, wDate=now() where idx = ?";
+			sql = "update "+ bName +" set title=?, content=?, openSw=?, hostIp=?, wDate=now(), listImg=?, listImgfSName=? where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getOpenSw());
 			pstmt.setString(4, vo.getHostIp());
-			pstmt.setInt(5, vo.getIdx());
+			pstmt.setString(5, vo.getListImg());
+			pstmt.setString(6, vo.getListImgfSName());
+			pstmt.setInt(7, vo.getIdx());
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());

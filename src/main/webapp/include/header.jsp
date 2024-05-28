@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
-<%
-  int level = session.getAttribute("sLevel")==null ? 999 : (int) session.getAttribute("sLevel");
-  pageContext.setAttribute("level", level);
-%>
+
 <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row bg-light align-items-center py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
-            <a href="${ctp}/Main" class="text-decoration-none">
+            <a href="http://192.168.50.70:9090${ctp}" class="text-decoration-none">
                 <span class="h1 text-primary px-2"><i class="fa-solid fa-video"></i></span>
                 <span class="h1 text-dark px-2">Movie</span>
                 <span class="h1 text-dark px-2 ml-n1">Review</span>

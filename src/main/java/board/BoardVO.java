@@ -15,6 +15,7 @@ public class BoardVO {
 	private String listImgfSName;
 	private String fName;
 	private String fSName;
+	private String openSw;
 	
 	private int hour_diff;	// 게시글을 24시간 경과유무 체크변수
 	private int date_diff;	// 게시글을 일자 경과유무 체크변수
@@ -121,14 +122,22 @@ public class BoardVO {
 	public void setReplyCnt(int replyCnt) {
 		this.replyCnt = replyCnt;
 	}
+	public String getOpenSw() {
+		return openSw;
+	}
+	public void setOpenSw(String openSw) {
+		this.openSw = openSw;
+	}
 	
 	@Override
 	public String toString() {
 		return "BoardVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", title=" + title + ", content="
-				+ ", good=" + good + ", complaint=" + complaint + ", listImg=" + listImg + ", listImgfSName=" + listImgfSName
-				+ ", fName=" + fName + ", fSName=" + fSName + ", hour_diff=" + hour_diff + ", date_diff=" + date_diff
+				+ content + ", readNum=" + readNum + ", hostIp=" + hostIp + ", wDate=" + wDate + ", good=" + good
+				+ ", complaint=" + complaint + ", listImg=" + listImg + ", listImgfSName=" + listImgfSName + ", fName=" + fName
+				+ ", fSName=" + fSName + ", openSw=" + openSw + ", hour_diff=" + hour_diff + ", date_diff=" + date_diff
 				+ ", replyCnt=" + replyCnt + "]";
 	}
+	
 	
 	
 }
