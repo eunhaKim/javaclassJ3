@@ -144,7 +144,7 @@
  		
  		// 댓글 수정박스 보이게
  		function replyUpdateBoxOpen(replyVoidx){
- 			$("#replyUpdateBox"+replyVoidx).show();
+ 			$("#replyUpdateBox"+replyVoidx).toggle();
  		}
  		// 댓글수정
     function replyCheck2(replyVoidx) {
@@ -229,7 +229,7 @@
         	<!-- 게시글 END -->
         	<!-- 버튼영역 -->
         	<div class="row noline text-center mt-3">
-        		<div class="col-sm-3 text-left"><input type="button" value="목록보기" onclick="location.href='BoardList.bo?bName=${bName}';" class="btn btn-success" /></div>
+        		<div class="col-sm-3 text-left"><input type="button" value="목록보기" onclick="location.href='BoardList.bo?bName=${bName}&pag=${pag}&pageSize=${pageSize}';" class="btn btn-success" /></div>
 		        <div class="col-sm-9 text-right">
 	        		<c:if test="${sNickName == vo.nickName || sLevel == 0}">
 				        <input type="button" value="수정" onclick="location.href='BoardUpdate.bo?bName=${bName}&idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}';" class="btn btn-primary" />
@@ -277,11 +277,14 @@
         	<!-- 댓글 입력창 -->
 					<form name="replyForm">
 						<div class="row mt-5 mb-3"><h6><i class="fa-solid fa-pen-to-square mr-2 text-muted"></i>댓글작성</h6></div>
-						<div><i class="fa-solid fa-user text-primary mr-2"></i>${sNickName}</div>
-						<div class="row noline">
-	        		<div class="col-md-10"><textarea rows="2" name="content" id="content" class="form-control" placeholder="권리침해, 욕설, 비하, 명예훼손, 혐오, 불법촬영물 등의 내용을 게시하면 운영정책 및 관련법률에 의해 제재될 수 있습니다."></textarea></div>
-							<div class="col-md-2"><input type="button" value="댓글달기" onclick="replyCheck()" class="btn btn-primary h-100 w-100"/></div>
-	        	</div>
+						<c:if test="${sLevel==null || sLevel > 4}">😘 댓글을 입력하시려면 <a href="MemberLogin.mem" class="badge badge-success">로그인</a> 해주세요.</c:if>
+						<c:if test="${sLevel < 4}">
+							<div><i class="fa-solid fa-user text-primary mr-2"></i>${sNickName}</div>
+							<div class="row noline">
+		        		<div class="col-md-10"><textarea rows="2" name="content" id="content" class="form-control" placeholder="권리침해, 욕설, 비하, 명예훼손, 혐오, 불법촬영물 등의 내용을 게시하면 운영정책 및 관련법률에 의해 제재될 수 있습니다."></textarea></div>
+								<div class="col-md-2"><input type="button" value="댓글달기" onclick="replyCheck()" class="btn btn-primary h-100 w-100"/></div>
+		        	</div>
+						</c:if>
 					</form>
 					<!-- 댓글 입력창 END -->
         </div>

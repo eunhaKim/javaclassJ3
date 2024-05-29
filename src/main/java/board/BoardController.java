@@ -43,6 +43,11 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "/boardContent.jsp?bName="+bName;
 		}
+		else if(com.equals("/BoardSearchList")) {
+			command = new BoardSearchListCommand();
+			command.execute(request, response);
+			viewPage += "/boardSearchList.jsp";
+		}
 		else if(level > 4) {
 			request.setAttribute("message", "로그인후 사용하세요");
 			request.setAttribute("url", request.getContextPath()+"/MemberLogin.mem");
@@ -97,6 +102,7 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			return;
 		}
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);		

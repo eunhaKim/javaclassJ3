@@ -57,7 +57,6 @@ public class BoardContentCommand implements BoardInterface {
 		// 댓글 처리
 		ArrayList<BoardReplyVO> replyVos = dao.getBoardReply(bName, idx);
 		request.setAttribute("replyVos", replyVos);
-		System.out.println(replyVos);
 	}
 
 }

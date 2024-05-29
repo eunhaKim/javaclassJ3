@@ -23,7 +23,7 @@ public class BoardListCommand implements BoardInterface {
 		else contentsShow = session.getAttribute("sMid")==null ? "" : (String) session.getAttribute("sMid");
 		
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
-		int pageSize = request.getParameter("pageSize")==null ? 10 : Integer.parseInt(request.getParameter("pageSize"));
+		int pageSize = request.getParameter("pageSize")==null ? 8 : Integer.parseInt(request.getParameter("pageSize"));
 		String bName = request.getParameter("bName")==null? "" : request.getParameter("bName");
 		
 		Pagination.pageChange(request, pag, pageSize, contentsShow, bName, "");
