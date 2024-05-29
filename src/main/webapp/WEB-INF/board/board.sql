@@ -70,6 +70,25 @@ create table movieTogether (
   foreign key(mid) references member(mid)
 );
 
+/* 신고테이블(complaint) */
+create table complaint(
+  idx  int not null auto_increment,	/* 신고테이블 고유번호 */
+  bName varchar(20) not null,				/* 신고된 게시물의 해당 게시판(bName) */
+  boardIdx int not null,						/* 신고된 게시글의 고유번호 */
+  cpMid varchar(20) not null,				/* 신고자 아이디 */
+  cpContent text not null,					/* 신고 사유 */
+  cpDate datetime default now(),		/* 신고한 날짜 */
+  primary key(idx)
+);
+desc complaint;
+insert into complaint values (default, 'boardRecommend', 10, 'atom', '광고성 글', default);
+select * from complaint;
+select c.*, b.title, b.nickName, b.mid from complaint c, board b where c.partIdx = b.idx;
+select c.*, b.title as title, b.nickName as nickName, b.mid as mid from complaint c, board b where c.partIdx = b.idx;
+select c.*, date_format(c.cpDate, '%Y-%m-%d %H:%i') as cpDate, b.title as title, b.nickName as nickName, b.mid as mid from complaint c, board b where c.partIdx = b.idx;
+
+
+
 /* 댓글 달기 */
 create table boardReply (
   idx       int not null auto_increment,	/* 댓글 고유번호 */
@@ -85,11 +104,12 @@ create table boardReply (
 );
 desc boardReply;
 
-insert into boardReply values (default, 33, 'kms1234', '김장미', default, '192.168.50.12','글을 참조 했습니다.');
+insert into boardReply values (default, 'boardRecommend', 10, 'atom', '아톰맨', default, '192.168.50.70','댓글 테스트');
 insert into boardReply values (default, 32, 'kms1234', '김장미', default, '192.168.50.12','다녀갑니다.');
 insert into boardReply values (default, 34, 'kms1234', '김장미', default, '192.168.50.12','멋진글이군요...');
 
 select * from boardReply;
+select * from boardReply where bName='boardRecommend' and boardIdx=10;
 
 select * from board;
 select * from board where idx = 9;  /* 현재글 */
@@ -133,23 +153,14 @@ select *,(select count(*) from boardReply where boardIdx = b.idx) as replyCnt fr
 
 /*  view  /  index 파일 연습 */
 select * from board where mid = 'admin';
-
 create view adminView as select * from board where mid = 'admin';
-
 select * from adminView;
-
 show tables;
-
 show full tables in javaclass where table_type like 'view';
-
 drop view adminview;
-
 desc board;
-
 create index nickNameIndex on board(nickName);
-
 show index from board;
-
 alter table board drop index nickNameIndex;
 
 
@@ -164,15 +175,10 @@ create table complaint(
   primary key(idx)
 );
 desc complaint;
-
 insert into complaint values (default, 'board', 24, 'hkd1234', '광고성 글', default);
-
 select * from complaint;
-
 select c.*, b.title, b.nickName, b.mid from complaint c, board b where c.partIdx = b.idx;
-
 select c.*, b.title as title, b.nickName as nickName, b.mid as mid from complaint c, board b where c.partIdx = b.idx;
-
 select c.*, date_format(c.cpDate, '%Y-%m-%d %H:%i') as cpDate, b.title as title, b.nickName as nickName, b.mid as mid from complaint c, board b where c.partIdx = b.idx;
 
 

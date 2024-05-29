@@ -2,6 +2,7 @@ package board;
 
 public class BoardReplyVO {
 	private int idx;
+	private String bName;
 	private int boardIdx;
 	private String mid;
 	private String nickName;
@@ -14,6 +15,12 @@ public class BoardReplyVO {
 	}
 	public void setIdx(int idx) {
 		this.idx = idx;
+	}
+	public String getbName() {
+		return bName;
+	}
+	public void setbName(String bName) {
+		this.bName = bName;
 	}
 	public int getBoardIdx() {
 		return boardIdx;
@@ -54,7 +61,8 @@ public class BoardReplyVO {
 	
 	@Override
 	public String toString() {
-		return "BoardReply [idx=" + idx + ", boardIdx=" + boardIdx + ", mid=" + mid + ", nickName=" + nickName + ", wDate="
-				+ wDate + ", hostIp=" + hostIp + ", content=" + content + "]";
+		return "BoardReplyVO [idx=" + idx + ", bName=" + bName + ", boardIdx=" + boardIdx + ", mid=" + mid + ", nickName="
+				+ nickName + ", wDate=" + wDate + ", hostIp=" + hostIp + ", content=" + content + "]";
 	}
+	
 }

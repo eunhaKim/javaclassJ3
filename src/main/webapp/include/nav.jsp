@@ -60,7 +60,7 @@
                         <a href="GuestList.gu" class="nav-item nav-link">방명록</a>
                         
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">My Account <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">My Account<i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                 <c:if test="${level > 4}">
 			                            <a href="MemberLogin.mem" class="dropdown-item">로그인</a>

@@ -328,18 +328,20 @@ public class BoardDAO {
 	}
 
 	// 작성된 댓글 가져오기
-	public ArrayList<BoardReplyVO> getBoardReply(int idx) {
+	public ArrayList<BoardReplyVO> getBoardReply(String bName, int boardIdx) {
 		ArrayList<BoardReplyVO> replyVos = new ArrayList<>();
 		try {
-			sql = "select * from boardReply where boardIdx = ?";
+			sql = "select * from boardReply where bName=? and boardIdx=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx);
+			pstmt.setString(1, bName);
+			pstmt.setInt(2, boardIdx);
 			rs = pstmt.executeQuery();
 			
 			BoardReplyVO vo = null;
 			while(rs.next()) {
 				vo = new BoardReplyVO();
 				vo.setIdx(rs.getInt("idx"));
+				vo.setbName(rs.getString("bName"));
 				vo.setBoardIdx(rs.getInt("boardIdx"));
 				vo.setMid(rs.getString("mid"));
 				vo.setNickName(rs.getString("nickName"));
@@ -361,13 +363,14 @@ public class BoardDAO {
 	public int setReplyInput(BoardReplyVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into boardReply values (default,?,?,?,default,?,?)";
+			sql = "insert into boardReply values (default,?,?,?,?,default,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, vo.getBoardIdx());
-			pstmt.setString(2, vo.getMid());
-			pstmt.setString(3, vo.getNickName());
-			pstmt.setString(4, vo.getHostIp());
-			pstmt.setString(5, vo.getContent());
+			pstmt.setString(1, vo.getbName());
+			pstmt.setInt(2, vo.getBoardIdx());
+			pstmt.setString(3, vo.getMid());
+			pstmt.setString(4, vo.getNickName());
+			pstmt.setString(5, vo.getHostIp());
+			pstmt.setString(6, vo.getContent());
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
@@ -384,6 +387,63 @@ public class BoardDAO {
 			sql = "delete from boardReply where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			pstmtClose();			
+		}
+		return res;
+	}
+
+	//신고내역 저장하기
+	public int setBoardComplaintInput(ComplaintVO vo) {
+	int res = 0;
+	try {
+		sql = "insert into complaint values (default, ?, ?, ?, ?, default)";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getbName());
+		pstmt.setInt(2, vo.getBoardIdx());
+		pstmt.setString(3, vo.getCpMid());
+		pstmt.setString(4, vo.getCpContent());
+		res = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		System.out.println("SQL 오류 : " + e.getMessage());
+	} finally {
+		pstmtClose();			
+	}
+		return res;
+	}
+
+	
+//신고글 유무 체크하기
+	public String getReport(String bName, int boardIdx) {
+		String report = "NO";
+		try {
+			sql = "select * from complaint where bName = ? and boardIdx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bName);
+			pstmt.setInt(2, boardIdx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) report = "OK";
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();			
+		}
+		return report;
+	}
+
+	// 댓글 수정
+	public int setReplyUpdate(BoardReplyVO vo) {
+		int res = 0;
+		try {
+			sql = "update boardReply set content = ?, hostIp=? where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getContent());
+			pstmt.setString(2, vo.getHostIp());
+			pstmt.setInt(3, vo.getIdx());
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());

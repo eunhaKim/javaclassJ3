@@ -22,6 +22,13 @@ public class BoardContentCommand implements BoardInterface {
 		
 		BoardDAO dao = new BoardDAO();
 		
+		BoardVO vo = dao.getBoardContent(bName, idx);
+		request.setAttribute("vo", vo);
+		request.setAttribute("bName", bName);
+		request.setAttribute("pag", pag);
+		request.setAttribute("pageSize", pageSize);
+
+		
 		// 게시글 조회수 1씩 증가시키기(중복방지)
 		HttpSession session = request.getSession();
 		ArrayList<String> contentReadNum = (ArrayList<String>) session.getAttribute("sContentIdx");
@@ -32,15 +39,25 @@ public class BoardContentCommand implements BoardInterface {
 			contentReadNum.add(imsiContentReadNum);
 		}
 		session.setAttribute("sContentIdx", contentReadNum);
-		BoardVO vo = dao.getBoardContent(bName, idx);
-		request.setAttribute("vo", vo);
-		request.setAttribute("bName", bName);
-		request.setAttribute("pag", pag);
-		request.setAttribute("pageSize", pageSize);
 		
+		// 신고글 유무 처리하기
+		String report = dao.getReport(bName, idx);
 		
+		request.setAttribute("report", report);
+		request.setAttribute("flag", flag);
+		request.setAttribute("search", search);
+		request.setAttribute("searchString", searchString);
 		
+		// 이전글/다음글처리
+		BoardVO preVo = dao.getPreNextSearch(bName, idx, "preVo");
+		BoardVO nextVo = dao.getPreNextSearch(bName, idx, "nextVo");
+		request.setAttribute("preVo", preVo);
+		request.setAttribute("nextVo", nextVo);
 		
+		// 댓글 처리
+		ArrayList<BoardReplyVO> replyVos = dao.getBoardReply(bName, idx);
+		request.setAttribute("replyVos", replyVos);
+		System.out.println(replyVos);
 	}
 
 }

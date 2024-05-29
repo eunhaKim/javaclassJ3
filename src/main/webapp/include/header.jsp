@@ -25,8 +25,14 @@
             </form>
         </div>
         <div class="col-lg-4 col-6 text-right">
+        	<c:if test="${sNickName == null}">
             <p class="m-0">Customer Service</p>
             <h5 class="m-0">010-2622-0194</h5>
+          </c:if>
+          <c:if test="${sNickName != null}">
+          	<p class="m-0">😋 nickName</p>
+          	<h5 class="m-0">${sNickName}</h5>
+          </c:if>
         </div>
     </div>
 </div>

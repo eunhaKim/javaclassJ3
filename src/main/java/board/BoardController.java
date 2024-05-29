@@ -77,6 +77,26 @@ public class BoardController extends HttpServlet{
 			command.execute(request, response);
 			return;
 		}
+		else if(com.equals("/BoardComplaintInput")) {
+			command = new BoardComplaintInputCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/BoardReplyInput")) {
+			command = new BoardReplyInputCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/BoardReplyUpdate")) {
+			command = new BoardReplyUpdateCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/BoardReplyDelete")) {
+			command = new BoardReplyDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);		

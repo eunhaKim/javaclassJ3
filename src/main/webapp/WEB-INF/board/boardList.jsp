@@ -85,7 +85,7 @@
       
       	<c:set var="curScrStartNo" value="${curScrStartNo}" />
     		<c:forEach var="vo" items="${vos}" varStatus="st">
-		    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+		    <div class="col-lg-3 col-md-6 col-sm-6 pb-1">
 		      <div class="product-item bg-light mb-4">
 	          <div class="product-img position-relative overflow-hidden text-center" style="height:240px;background:#e9e9e9">
               <img class="img-fluid h-100" src="${ctp}/images/board/${vo.listImgfSName}" alt="${curScrStartNo}번글 리스트 이미지">
