@@ -26,6 +26,7 @@
             <a class="text-secondary mb-2" href="https://fontawesome.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>Fontawesome</a>
             <a class="text-secondary mb-2" href="https://www.dbcut.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>DBCUT(벤치마킹)</a>
             <a class="text-secondary mb-2" href="https://icon-icons.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>아이콘다운로드</a>
+            <a class="text-secondary mb-2" href="https://htmlcodex.com/demo/?item=1479" target="_blank"><i class="fa fa-angle-right mr-2"></i>적용템플릿</a>
           </div>
         </div>
         <div class="col-md-4 mb-5">
@@ -59,6 +60,7 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 

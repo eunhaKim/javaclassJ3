@@ -5,7 +5,7 @@
 <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row bg-light align-items-center py-3 px-xl-5 d-none d-lg-flex">
-        <div class="col-lg-4">
+        <div class="col-lg-4" id="logo">
             <a href="http://192.168.50.70:9090${ctp}" class="text-decoration-none">
                 <span class="h1 text-primary px-2"><i class="fa-solid fa-video"></i></span>
                 <span class="h1 text-dark px-2">Movie</span>
