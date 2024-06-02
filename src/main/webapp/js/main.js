@@ -1,4 +1,4 @@
-(function ($) {
+$(function(){
     "use strict";
     
     // Dropdown on mouse hover
@@ -100,5 +100,6 @@
         button.parent().parent().find('input').val(newVal);
     });
     
-})(jQuery);
+   
+});
 

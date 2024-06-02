@@ -18,6 +18,7 @@
     }
     
   	function modalCheck(idx, hostIp, mid, nickName) {
+  		$("#myModal #modalTitle").text(nickName+"님의 프로필");
   		$("#myModal #modalHostIp").text(hostIp);
   		$("#myModal #modalMid").text(mid);
   		$("#myModal #modalNickName").text(nickName);
@@ -54,7 +55,7 @@
       <nav class="breadcrumb bg-light mb-30">
         <a class="breadcrumb-item text-dark" href="${ctp}/Main">Home</a>
         <a class="breadcrumb-item text-dark">Community</a>
-        <a href="BoardList.bo?bName=${bName}" class="breadcrumb-item active">${bTextName}</a>
+        <a href="BoardList.bo?bName=${bName}&pag=${param.pag}&pageSize=${param.pageSize}" class="breadcrumb-item active">${bTextName}</a>
       </nav>
     </div>
   </div>
@@ -85,7 +86,7 @@
       
       	<c:set var="curScrStartNo" value="${curScrStartNo}" />
     		<c:forEach var="vo" items="${vos}" varStatus="st">
-		    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+		    <div class="col-lg-3 col-md-4 col-sm-6 pb-1 wow pulse" data-wow-delay = "${0.4*st.count}s">
 		      <div class="product-item bg-light mb-4">
 	          <div class="product-img position-relative overflow-hidden text-center" style="height:240px;background:#e9e9e9">
               <img class="img-fluid h-100" src="${ctp}/images/board/${vo.listImgfSName}" alt="${curScrStartNo}번글 리스트 이미지">
@@ -165,7 +166,7 @@
     
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title" id="modalTitle"></h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       

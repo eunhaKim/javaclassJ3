@@ -62,6 +62,7 @@ public class Pagination {
 			String searchTitle = "";
 			if(searchField.equals("title")) searchTitle = "글제목";
 			else if(searchField.equals("nickName")) searchTitle = "글쓴이";
+			else if(searchField.equals("mid")) searchTitle = "아이디";
 			else searchTitle = "글내용";
 			request.setAttribute("searchField", searchField);
 			request.setAttribute("searchTitle", searchTitle);

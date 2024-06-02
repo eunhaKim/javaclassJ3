@@ -142,10 +142,19 @@
     	});
     }
  		
- 		// 댓글 수정박스 보이게
- 		function replyUpdateBoxOpen(replyVoidx){
- 			$("#replyUpdateBox"+replyVoidx).toggle();
+ 		// 댓글 수정박스 보이게(중복불허!)
+ 		function replyUpdateBoxOpen(replyVoIdx){
+ 			let boxdisplay = window.getComputedStyle(document.getElementById('replyUpdateBox'+replyVoIdx)).display;
+ 			// console.log(boxdisplay);
+ 			if(boxdisplay=='none'){ // 중복을 피하기 위해 다 닫고 누른것만 보이게 해준다.
+ 				$(".replyUpdateBox").hide();
+	 			$("#replyUpdateBox"+replyVoIdx).show();
+ 			}
+ 			else{ // 같은 수정 버튼을 두번 눌렀을때
+ 				$("#replyUpdateBox"+replyVoIdx).toggle();
+ 			}
  		}
+ 		
  		// 댓글수정
     function replyCheck2(replyVoidx) {
     	let content = $("#content"+replyVoidx).val();
@@ -187,13 +196,13 @@
 	            <nav class="breadcrumb bg-light mb-30">
 	                <a class="breadcrumb-item text-dark" href="${ctp}/Main">Home</a>
 	                <a class="breadcrumb-item text-dark">Community</a>
-	                <a href="BoardList.bo?bName=${bName}" class="breadcrumb-item active">영화추천</a>
+	                <a href="BoardList.bo?bName=${bName}&pag=${param.pag}&pageSize=${param.pageSize}" class="breadcrumb-item active">${bTextName}</a>
 	            </nav>
 	        </div>
 	    </div>
 	</div>
 	<!-- Breadcrumb End -->
-	<!-- Contact Start -->
+	<!-- Content Start -->
   <div class="container-fluid">
     <h2 class="section-title position-relative mx-xl-5 mb-4"><span class="bg-secondary pr-3">게시글보기</span></h2>
     <div class="row px-xl-5">
@@ -243,10 +252,10 @@
         	<!-- 이전글 다음글 -->
         	<div class="mt-5 mb-5">
 	        	<c:if test="${!empty nextVo.title}">
-		          <i class="fa-regular fa-file-lines text-success mr-2"></i><a href="BoardContent.bo?bName=${bName}&idx=${nextVo.idx}" class="h6 text-decoration-none text-truncate">다음글 : ${nextVo.title}</a><br/>
+		          <i class="fa-regular fa-file-lines text-success mr-2"></i><a href="BoardContent.bo?bName=${bName}&idx=${nextVo.idx}&pag=${param.pag}&pageSize=${param.pageSize}" class="h6 text-decoration-none text-truncate">다음글 : ${nextVo.title}</a><br/>
 		        </c:if>
 		        <c:if test="${!empty preVo.title}">
-		        	<i class="fa-regular fa-file-lines text-success mr-2"></i><a href="BoardContent.bo?bName=${bName}&idx=${preVo.idx}" class="h6 text-decoration-none text-truncate">이전글 : ${preVo.title}</a><br/>
+		        	<i class="fa-regular fa-file-lines text-success mr-2"></i><a href="BoardContent.bo?bName=${bName}&idx=${preVo.idx}&pag=${param.pag}&pageSize=${param.pageSize}" class="h6 text-decoration-none text-truncate">이전글 : ${preVo.title}</a><br/>
 		        </c:if>
 		      </div>
         	<!-- 이전글 다음글 END -->
@@ -268,8 +277,8 @@
 	        			${fn:replace(replyVo.content, newLine,"<br/>")}
 	        		</div>
 	        	</div>
-	        	<div class="row noline border" id="replyUpdateBox${replyVo.idx}" style="display:none;">
-	        		<div class="col-md-10"><textarea rows="2" name="content${replyVo.idx}" id="content${replyVo.idx}" class="form-control">${fn:replace(replyVo.content, newLine,"<br/>")}</textarea></div>
+	        	<div class="row noline border replyUpdateBox" id="replyUpdateBox${replyVo.idx}" style="display:none;">
+	        		<div class="col-md-10"><textarea rows="2" name="content${replyVo.idx}" id="content${replyVo.idx}" class="form-control">${replyVo.content}</textarea></div>
 	        		<div class="col-md-2"><input type="button" value="댓글수정" onclick="replyCheck2(${replyVo.idx})" class="btn btn-success h-100 w-100"/></div>
         		</div>
 	        </c:forEach>
@@ -298,7 +307,7 @@
       <!-- 리스트 이미지 END -->
     </div>
   </div>
-  <!-- Contact End -->
+  <!-- Content End -->
   <!-- 신고하기 폼 모달창 -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">

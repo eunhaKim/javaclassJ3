@@ -12,6 +12,8 @@ public class MovieVO {
 	private String movie_adult;
 	private String movie_date;
 	private String movie_subject;
+	private String movie_tagline;
+	
 	
 	public int getMovie_id() {
 		return movie_id;
@@ -79,6 +81,12 @@ public class MovieVO {
 	public void setMovie_subject(String movie_subject) {
 		this.movie_subject = movie_subject;
 	}
+	public String getMovie_tagline() {
+		return movie_tagline;
+	}
+	public void setMovie_tagline(String movie_tagline) {
+		this.movie_tagline = movie_tagline;
+	}
 	
 	@Override
 	public String toString() {
@@ -86,6 +94,8 @@ public class MovieVO {
 				+ ", movie_popularity=" + movie_popularity + ", movie_vote_average=" + movie_vote_average
 				+ ", movie_vote_count=" + movie_vote_count + ", movie_poster_path=" + movie_poster_path
 				+ ", movie_backdrop_path=" + movie_backdrop_path + ", movie_adult=" + movie_adult + ", movie_date=" + movie_date
-				+ ", movie_subject=" + movie_subject + "]";
+				+ ", movie_subject=" + movie_subject + ", movie_tagline=" + movie_tagline + "]";
 	}
+	
+
 }

@@ -43,7 +43,7 @@ public class BoardDAO {
 				if(contentsShow.equals("adminOK")) {
 				  sql = "select *, datediff(wDate, now()) as date_diff, "
 				  		+ "timestampdiff(hour, wDate, now()) as hour_diff, "
-				  		+ "(select count(*) from boardReply where boardIdx = b.idx) as replyCnt "
+				  		+ "(select count(*) from boardReply where boardIdx = b.idx and bName = '"+bName+"') as replyCnt "
 				  		+ "from "+ bName +" b order by idx desc limit ?,?";
 				  pstmt = conn.prepareStatement(sql);
 				  pstmt.setInt(1, startIndexNo);
@@ -55,7 +55,7 @@ public class BoardDAO {
 							+ "(select count(*) from boardReply where boardIdx = b.idx) as replyCnt "
 							+ "from "+ bName +" b where openSW = 'OK' and complaint = 'NO' union "
 							+ "select *, datediff(wDate, now()) as date_diff, timestampdiff(hour, wDate, now()) as hour_diff, "
-							+ "(select count(*) from boardReply where boardIdx = b.idx) as replyCnt "
+							+ "(select count(*) from boardReply where boardIdx = b.idx and bName = '"+bName+"') as replyCnt "
 							+ "from "+ bName +" b "
 							+ "where mid = ? order by idx desc limit ?,?";
 					pstmt = conn.prepareStatement(sql);
@@ -67,7 +67,7 @@ public class BoardDAO {
 			else {
 				if(contentsShow.equals("adminOK")) {
 				  sql = "select *, datediff(wDate, now()) as date_diff, timestampdiff(hour, wDate, now()) as hour_diff, "
-				  		+ "(select count(*) from boardReply where boardIdx = b.idx) as replyCnt "
+				  		+ "(select count(*) from boardReply where boardIdx = b.idx and bName = '"+bName+"') as replyCnt "
 				  		+ "from "+ bName +" b where "+search+" like ? order by idx desc limit ?,?";
 				  pstmt = conn.prepareStatement(sql);
 				  pstmt.setString(1, "%"+searchString+"%");
@@ -80,7 +80,7 @@ public class BoardDAO {
 							+ "(select count(*) from boardReply where boardIdx = b.idx) as replyCnt "
 							+ "from "+ bName +" b where openSW = 'OK' and complaint = 'NO' and "+search+" like ? union "
 							+ "select *, datediff(wDate, now()) as date_diff, timestampdiff(hour, wDate, now()) as hour_diff, "
-							+ "(select count(*) from boardReply where boardIdx = b.idx) as replyCnt "
+							+ "(select count(*) from boardReply where boardIdx = b.idx and bName = '"+bName+"') as replyCnt "
 							+ "from "+ bName +" b "
 							+ "where mid = ? and "+search+" like ? order by idx desc limit ?,?";
 					pstmt = conn.prepareStatement(sql);
@@ -451,6 +451,70 @@ public class BoardDAO {
 			pstmtClose();			
 		}
 		return res;
+	}
+
+	// mid가 쓴 최근 게시물 3개만 가져오기
+	public ArrayList<BoardVO> getMemberBoardSearch(String bName, String mid) {
+		ArrayList<BoardVO> vos = new ArrayList<BoardVO>();
+		try {
+			sql = "select * from "+ bName +" where mid = ? order by wDate desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setTitle(rs.getString("title"));
+				vo.setContent(rs.getString("content"));
+				vo.setReadNum(rs.getInt("readNum"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setGood(rs.getInt("good"));
+				vo.setListImg(rs.getString("listImg"));
+				vo.setListImgfSName(rs.getString("listImgfSName"));
+				vo.setOpenSw(rs.getString("openSw"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();			
+		}
+		return vos;
+	}
+
+	// 내가 쓴 댓글리스트
+	public ArrayList<BoardReplyVO> getBoardReplySearch(String mid) {
+		ArrayList<BoardReplyVO> replyVos = new ArrayList<>();
+		try {
+			sql = "select * from boardReply where mid=? order by wDate desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			
+			BoardReplyVO vo = null;
+			while(rs.next()) {
+				vo = new BoardReplyVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setbName(rs.getString("bName"));
+				vo.setBoardIdx(rs.getInt("boardIdx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setContent(rs.getString("content"));
+				
+				replyVos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();			
+		}
+		return replyVos;
 	}
 
 }

@@ -84,6 +84,11 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
+		else if(com.equals("/MemberPhotoChange")) {
+			command = new MemberPhotoChangeCommand();
+			command.execute(request, response);
+			return;
+		}
 		else if(com.equals("/MemberPwdChangeCheck")) {
 			command = new MemberPwdChangeCheckCommand();
 			command.execute(request, response);

@@ -276,5 +276,22 @@ public class MemberDAO {
 		}
 		return res;
 	}
+
+	// 멤버 사진변경
+	public int updateMemberPhoto(String mid, String photo) {
+		int res = 0;
+		try {
+			sql = "update member set photo = ? where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, photo);
+			pstmt.setString(2, mid);
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
 	
 }

@@ -17,7 +17,7 @@ public class GuestListCommand implements GuestInterface {
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		
 		// 2. 한페이지의 분량을 구한다.
-		int pageSize = request.getParameter("pageSize")==null ? 4 : Integer.parseInt(request.getParameter("pageSize"));
+		int pageSize = request.getParameter("pageSize")==null ? 8 : Integer.parseInt(request.getParameter("pageSize"));
 		
 		// 3. 총 레코드 건수를 구한다.(sql명령어중 count함수 이용)
 		int totRecCnt = dao.getTotRecCnt();

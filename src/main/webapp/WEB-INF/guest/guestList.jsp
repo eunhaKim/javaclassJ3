@@ -44,7 +44,7 @@
       
       <div class="row px-xl-5">
         <c:forEach var="vo" items="${vos}" varStatus="st">
-        	<div class="col-xl-3 col-lg-4 col-sm-6 mb-5">
+        	<div class="col-xl-3 col-lg-4 col-sm-6 mb-5 wow fadeIn" data-wow-delay = "${0.4*st.count}s">
         		<div class="card bg-light ">
 	        		<div class="card-header d-flex align-items-center justify-content-between">
 	        			<div><i class="fa-solid fa-user text-primary mr-2"></i>${vo.name}</div>

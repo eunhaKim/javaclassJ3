@@ -25,8 +25,8 @@
           <div class="d-flex flex-column justify-content-start">
             <a class="text-secondary mb-2" href="https://fontawesome.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>Fontawesome</a>
             <a class="text-secondary mb-2" href="https://www.dbcut.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>DBCUT(벤치마킹)</a>
+            <a class="text-secondary mb-2" href="https://www.themoviedb.org/settings/api" target="_blank"><i class="fa fa-angle-right mr-2"></i>TMDB 영화api</a>
             <a class="text-secondary mb-2" href="https://icon-icons.com/" target="_blank"><i class="fa fa-angle-right mr-2"></i>아이콘다운로드</a>
-            <a class="text-secondary mb-2" href="https://htmlcodex.com/demo/?item=1479" target="_blank"><i class="fa fa-angle-right mr-2"></i>적용템플릿</a>
           </div>
         </div>
         <div class="col-md-4 mb-5">
@@ -63,10 +63,15 @@
 <script src="lib/wow/wow.min.js"></script>
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-<!-- Contact Javascript File -->
-<script src="mail/jqBootstrapValidation.min.js"></script>
-<script src="mail/contact.js"></script>
+<script>
+  wow = new WOW({
+      boxClass: 'wow', // default
+      offset: 150, // default //스크롤px 보통 150~200 정도
+      mobile: true, // default //모바일에서 s안 쓴다면 false
+      live: true // default
+  })
+  wow.init();
+</script>
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>

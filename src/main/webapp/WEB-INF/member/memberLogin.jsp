@@ -26,6 +26,12 @@
 <body>
 	<%@ include file = "/include/header.jsp" %>
 	<%@ include file = "/include/nav.jsp" %>
+	<script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // 이전 페이지의 주소값을 가져와서 숨겨진 입력 필드에 설정
+          document.getElementById('redirectInput').value = document.referrer;
+      });
+  </script>
 	
 	<!-- Breadcrumb Start -->
 	<div class="container-fluid">
@@ -45,7 +51,7 @@
   <div class="container-fluid">
       <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Login</span></h2>
       <div class="row px-xl-5">
-          <div class="col-lg-6 mb-5">
+          <div class="col-lg-8 mb-5">
               <div class="bg-light p-30">
                   <div id="success"></div>
                   <form name="myform" id="myform" method="post" action="MemberLoginOk.mem" novalidate="novalidate">
@@ -67,6 +73,7 @@
 	                        </div> 
                           <button class="btn btn-primary py-2 px-4 mt-2 form-control" type="submit" id="sendMessageButton">로그인</button>
                       </div>
+                      <input type="hidden" name="redirect" id="redirectInput"><!-- URL 매개 변수를 숨겨진 필드로 포함하여 로그인 폼을 제출. 로그인후 이전페이지 돌아가기 위해.. -->
                   </form>
               </div>
               <div class="bg-light mt-3  p-30">
@@ -74,9 +81,9 @@
                   <i class="fa-solid fa-magnifying-glass text-primary mr-3 ml-3"></i>아이디 / 패스워드 찾기
               </div>
           </div>
-          <div class="col-lg-6 mb-5">
+          <div class="col-lg-4 mb-5">
               <div class="bg-light p-30 mb-30">
-                  네이버 카카오톡 구글 로그인...
+                  <iframe src='https://tv.naver.com/embed/50365435' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='100%' HEIGHT='271px' allowfullscreen></iframe>
               </div>
           </div>
       </div>

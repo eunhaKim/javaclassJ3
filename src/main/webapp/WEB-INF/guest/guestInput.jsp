@@ -33,7 +33,7 @@
   <div class="container-fluid">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">방명록등록</span></h2>
     <div class="row px-xl-5">
-      <div class="col-lg-6 mb-5">
+      <div class="col-lg-8 mb-5">
         <div class="bg-light p-30">
         	<p><i class="fa-solid fa-volume-high mr-2 text-primary"></i>방문해주셔서 감사합니다. 방명록은 수정, 삭제가 안되니 신중하게 입력해주세요.</p>
         	<hr/>
@@ -67,9 +67,9 @@
 				  </form>
         </div>
       </div>
-      <div class="col-lg-6 mb-5">
+      <div class="col-lg-4 mb-5">
         <div class="bg-light p-30 mb-30">
-          방명록 등록 이미지
+          <iframe src='https://tv.naver.com/embed/51957727' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='100%' HEIGHT='400' allowfullscreen></iframe>
         </div>
       </div>
     </div>

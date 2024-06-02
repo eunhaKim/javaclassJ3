@@ -18,7 +18,7 @@
 <%@ include file = "/include/nav.jsp" %>
 
 <!-- Breadcrumb Start -->
-<div class="container-fluid">
+<div class="container-fluid wow fadeInUp" data-wow-delay = "0.1s" data-wow-duration="2s">
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
@@ -30,6 +30,6 @@
 </div>
 <!-- Breadcrumb End -->
 
-<%@ include file = "../../include/footer.jsp" %>
+<%@ include file = "/include/footer.jsp" %>
 </body>
 </html>

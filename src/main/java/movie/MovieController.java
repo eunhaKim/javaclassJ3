@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import board.BoardReplyDeleteCommand;
+import board.BoardReplyInputCommand;
+import board.BoardReplyUpdateCommand;
+
 @WebServlet("*.mv")
 public class MovieController extends HttpServlet{
 	@Override
@@ -20,13 +24,14 @@ public class MovieController extends HttpServlet{
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
-		String bName = request.getParameter("bName")==null ? "" : request.getParameter("bName");
-		String bTextName = "";
-		if(bName.equals("movieRecommend")) bTextName = "영화추천";
-		else if(bName.equals("movieNews")) bTextName="영화소식";
-		else if(bName.equals("movieTogether")) bTextName="같이 영화보러가요";
-		else bTextName="Board Title";
-		request.setAttribute("bTextName", bTextName);
+		String mName = request.getParameter("mName")==null ? "" : request.getParameter("mName");
+		String mTextName = "";
+		if(mName.equals("upcoming")) mTextName = "개봉예정영화";
+		else if(mName.equals("now_playing")) mTextName="현재상영작";
+		else if(mName.equals("popular")) mTextName="영화인기순";
+		else if(mName.equals("top_rated")) mTextName="영화평점순";
+		else mTextName="Movie Title";
+		request.setAttribute("mTextName", mTextName);
 		
 		// 인증....처리.....
 		HttpSession session = request.getSession();
@@ -38,13 +43,28 @@ public class MovieController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "/movieList.jsp";
 		}
+		else if(com.equals("/MovieContent")) {
+			command = new MovieContentCommand();
+			command.execute(request, response);
+			viewPage += "/movieContent.jsp";
+		}
 		else if(level > 4) {
 			request.setAttribute("message", "로그인후 사용하세요");
 			request.setAttribute("url", request.getContextPath()+"/MemberLogin.mem");
 			viewPage = "/include/message.jsp";
 		}
-		else if(com.equals("/MovieGoodCheck")) {
-			command = new MovieGoodCheckCommand();
+		else if(com.equals("/MovieReplyInput")) {
+			command = new MovieReplyInputCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/MovieReplyUpdate")) {
+			command = new MovieReplyUpdateCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/MovieReplyDelete")) {
+			command = new MovieReplyDeleteCommand();
 			command.execute(request, response);
 			return;
 		}
