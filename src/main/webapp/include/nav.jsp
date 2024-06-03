@@ -5,6 +5,7 @@
   int level = session.getAttribute("sLevel")==null ? 999 : (int) session.getAttribute("sLevel");
   pageContext.setAttribute("level", level);
 %>
+
 <!-- Navbar Start -->
 <div class="container-fluid bg-dark mb-30 sticky-top">
   <div class="row px-xl-5">
@@ -76,7 +77,7 @@
                 <c:if test="${level == 0}">
                 	<hr/>
                 	<a href="MemberList.mem" class="dropdown-item">회원리스트</a>
-          				<a href="AdminMain.ad" class="dropdown-item">관리자메뉴</a>
+          				<a href="AdminMain.ad" class="dropdown-item" target="_blank">관리자메뉴</a>
                 </c:if>
               </div>
             </div>

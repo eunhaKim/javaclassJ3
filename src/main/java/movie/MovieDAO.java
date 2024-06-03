@@ -227,18 +227,53 @@ public class MovieDAO {
 		return replyVos;
 	}
 	
+	//영화의 최신 리뷰리스트 가져오기
+	public ArrayList<MovieReplyVO> getMovieReplyList() {
+		ArrayList<MovieReplyVO> replyVos = new ArrayList<>();
+		try {
+			sql = "select movieReply.*, member.photo from movieReply left join member on movieReply.mid = member.mid order by idx desc";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			MovieReplyVO vo = null;
+			while(rs.next()) {
+				vo = new MovieReplyVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMovie_id(rs.getString("movie_id"));
+				vo.setMovie_title(rs.getString("movie_title"));
+				vo.setMovie_poster_path(rs.getString("movie_poster_path"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setStar(rs.getInt("star"));
+				vo.setrDate(rs.getString("rDate"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setContent(rs.getString("content"));
+				vo.setPhoto(rs.getString("photo"));
+				
+				replyVos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();			
+		}
+		return replyVos;
+	}
+	
 	//영화리뷰등록
 	public int setMovieReplyInput(MovieReplyVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into movieReply values (default,?,?,?,?,default,?,?)";
+			sql = "insert into movieReply values (default,?,?,?,?,?,?,default,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMovie_id());
-			pstmt.setString(2, vo.getMid());
-			pstmt.setString(3, vo.getNickName());
-			pstmt.setInt(4, vo.getStar());
-			pstmt.setString(5, vo.getHostIp());
-			pstmt.setString(6, vo.getContent());
+			pstmt.setString(2, vo.getMovie_title());
+			pstmt.setString(3, vo.getMovie_poster_path());
+			pstmt.setString(4, vo.getMid());
+			pstmt.setString(5, vo.getNickName());
+			pstmt.setInt(6, vo.getStar());
+			pstmt.setString(7, vo.getHostIp());
+			pstmt.setString(8, vo.getContent());
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());

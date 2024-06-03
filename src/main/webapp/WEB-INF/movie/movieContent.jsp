@@ -120,6 +120,8 @@
 	  	
 	  	let query = {
 	  			movie_id: '${vo.movie_id}',
+	  			movie_title: '${vo.movie_title}',
+	  			movie_poster_path: '${vo.movie_poster_path}',
 	  			mid    	: '${sMid}',
 	  			nickName: '${sNickName}',
 	  			star   	: star,

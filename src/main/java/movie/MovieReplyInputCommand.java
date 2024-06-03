@@ -11,6 +11,8 @@ public class MovieReplyInputCommand implements MovieInterface {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String movie_id = request.getParameter("movie_id")==null ? "" : request.getParameter("movie_id");
+		String movie_title = request.getParameter("movie_title")==null ? "" : request.getParameter("movie_title");
+		String movie_poster_path = request.getParameter("movie_poster_path")==null ? "" : request.getParameter("movie_poster_path");
 		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
 		String nickName = request.getParameter("nickName")==null ? "" : request.getParameter("nickName");
 		int star = request.getParameter("star")==null ? 0 : Integer.parseInt(request.getParameter("star"));
@@ -20,6 +22,8 @@ public class MovieReplyInputCommand implements MovieInterface {
 		MovieReplyVO vo = new MovieReplyVO();
 		
 		vo.setMovie_id(movie_id);
+		vo.setMovie_title(movie_title);
+		vo.setMovie_poster_path(movie_poster_path);
 		vo.setMid(mid);
 		vo.setNickName(nickName);
 		vo.setStar(star);

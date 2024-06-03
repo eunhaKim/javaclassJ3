@@ -55,7 +55,7 @@
       <nav class="breadcrumb bg-light mb-30">
         <a class="breadcrumb-item text-dark" href="${ctp}/Main">Home</a>
         <a class="breadcrumb-item text-dark">Community</a>
-        <a href="BoardList.bo?bName=${bName}&pag=${param.pag}&pageSize=${param.pageSize}" class="breadcrumb-item active">${bTextName}</a>
+        <a href="BoardList.bo?bName=${bName}" class="breadcrumb-item active">${bTextName}</a>
       </nav>
     </div>
   </div>

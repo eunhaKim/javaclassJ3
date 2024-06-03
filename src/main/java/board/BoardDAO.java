@@ -199,7 +199,6 @@ public class BoardDAO {
 		int res = 0;
 		try {
 			sql = "delete from "+ bName +" where idx = ?";
-			System.out.println(sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			res = pstmt.executeUpdate();
