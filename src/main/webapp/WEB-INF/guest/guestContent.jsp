@@ -54,7 +54,7 @@
           </div>
           <div class="col-lg-6 mb-5">
               <div class="bg-light p-30 mb-30">
-                  방명록 등록 이미지
+                  <iframe src='https://tv.naver.com/embed/51957727' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='100%' HEIGHT='400' allowfullscreen></iframe>
               </div>
           </div>
       </div>

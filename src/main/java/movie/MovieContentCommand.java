@@ -26,7 +26,8 @@ public class MovieContentCommand implements MovieInterface {
 			reviewTot += r.getStar();
 		}
 		double reviewAvg = 0.0;
-		if(replyVos.size() != 0) reviewAvg = (double) reviewTot / replyVos.size();
+		if(replyVos.size() != 0) reviewAvg = 
+				(double) reviewTot / replyVos.size();
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("replyVos", replyVos);

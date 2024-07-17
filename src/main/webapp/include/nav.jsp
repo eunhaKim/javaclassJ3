@@ -50,6 +50,7 @@
                 <a href="BoardList.bo?bName=movieNews" class="dropdown-item">영화 소식</a>
                 <a href="BoardList.bo?bName=movieRecommend" class="dropdown-item">영화 추천</a>
                 <a href="BoardList.bo?bName=movieTogether" class="dropdown-item">같이 영화보러가요</a>
+                <a href="BoardList.gal" class="dropdown-item">갤러리</a>
               </div>
             </div>
             

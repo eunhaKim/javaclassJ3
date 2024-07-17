@@ -146,7 +146,7 @@
 <!-- Testimonial Start -->
 <div class="container-fluid testimonial overflow-hidden py-5">
   <div class="row px-xl-5">
-    <div class="text-center mb-5 wow fadeInUp col-12" data-wow-delay="2s">
+    <div class="text-center mb-5 wow fadeInUp col-12"  data-wow-delay = "0.2s" data-wow-duration="2s">
       <div class="sub-style">
         <h5 class="sub-title text-primary px-3">회원 리뷰가 궁금해?</h5>
       </div>
@@ -160,12 +160,12 @@
     	<div class="row">
 	    	<c:if test="${!empty replyVos}">
 		      <c:forEach var="vo" items="${replyVos}" varStatus="st" begin="0" end="5">
-			      <div class="testimonial-item mb-5 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay = "${st.count*0.2}s" data-wow-duration="2s">
+			      <div class="testimonial-item mb-5 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay = "${st.count*0.5}s" data-wow-duration="1s">
 			        <div class="testimonial-content p-4 mb-5">
 			          <div class="d-flex">
 					        <a href="MovieContent.mv?mName=&movie_id=${vo.movie_id}"><img class="rounded mr-4" src="https://image.tmdb.org/t/p/w300${vo.movie_poster_path}" alt="${vo.movie_title} 이미지" style="width:100px" ></a>
 			            <div>
-						        <h6 class="fs-5 mt-2">${vo.movie_title}</h6>
+						        <h6 class="fs-5 mt-2"><a href="MovieContent.mv?mName=&movie_id=${vo.movie_id}" class="h5">${vo.movie_title}</a></h6>
 				            <div class="text-primary mr-2">
 					          	<c:forEach var="i" begin="1" end="${vo.star}" varStatus="iSt">
 						        	  <small class="fas fa-star"></small>

@@ -66,8 +66,6 @@ public class MovieDAO {
 		
 		String completed_url = base_url+subject+api_key+language+page;
 		
-		// System.out.println("callRestApi 호출");
-		
 		
 		try {
 			
@@ -75,11 +73,11 @@ public class MovieDAO {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			
 			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
 			conn.setDoOutput(true); // 서버로 받는 값이 있다
 			
 			// 데이터 읽기
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
 			StringBuilder sb = new StringBuilder();
 			String line = null;
 			
@@ -131,6 +129,85 @@ public class MovieDAO {
 		return vos;
 	}
 	
+	
+	//영화검색리스트
+	public ArrayList<MovieVO> getMovieSearchList(String searchString, String pageNum) {
+		ArrayList<MovieVO> vos = new ArrayList<MovieVO>();
+		
+		// URL에 순서대로 들어가면 된다
+		String base_url = "https://api.themoviedb.org/3/search/movie";					// 영화 검색 기본 url
+		String api_key = "?api_key=bbba5ebfd151ae4575f0ef194876edf1";	// api 키
+		String query = "&query=" + searchString;																// 주제 ( 인기있는 , 탑레이팅 , 업커밍 등 )
+		String language = "&language=ko-kr";												// 언어 옵션
+		String page = "&page="+ pageNum;													// 페이지 옵션 ( 안넣으면 디폴트 1 )
+		
+		String completed_url = base_url+api_key+query+language+page;
+		
+		// System.out.println("callRestApi 호출");
+		
+		
+		try {
+			
+			URL url = new URL(completed_url);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+			conn.setDoOutput(true); // 서버로 받는 값이 있다
+			
+			// 데이터 읽기
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			
+			// 읽을 수 있을 때 까지
+			while((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+			
+			JSONParser parser = new JSONParser();
+			JSONObject obj = (JSONObject) parser.parse(sb.toString());
+			
+			JSONArray objArray = (JSONArray) obj.get("results");
+			
+			for(int i=0; i<objArray.size(); i++) {
+				// System.out.println(objArray.get(i));
+				JSONObject rs = (JSONObject) objArray.get(i);
+				
+				// 오버뷰가 "" 이 아닌경우만 담기
+				if(!rs.get("overview").equals("")) {
+					
+					MovieVO vo = new MovieVO();
+					vo.setMovie_id(Integer.parseInt((String.valueOf(rs.get("id")))));
+					vo.setMovie_title((String) rs.get("title"));
+					vo.setMovie_overview((String) rs.get("overview"));
+					vo.setMovie_popularity((double) rs.get("popularity"));
+					vo.setMovie_vote_average((double) rs.get("vote_average"));
+					vo.setMovie_vote_count(Integer.parseInt((String.valueOf(rs.get("vote_count")))));
+					vo.setMovie_poster_path((String) rs.get("poster_path"));
+					vo.setMovie_backdrop_path((String) rs.get("backdrop_path"));
+					vo.setMovie_adult((String) rs.get("movie_adult"));
+					vo.setMovie_date((String) rs.get("release_date"));
+					// System.out.println(vo);
+					
+					vos.add(vo);
+				}
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			System.out.println("URL이 잘못되었습니다.");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Input 또는 Ouput 오류");
+		} catch (ParseException e) {
+			e.printStackTrace();
+			System.out.println("제이슨 파싱 실패");
+		}
+		
+		return vos;
+	}
+	
+	
 	// 영화 상세페이지 정보 가져오기
 	public MovieVO getMovieDetails(String movie_id) {
 		MovieVO vo = new MovieVO();
@@ -147,11 +224,11 @@ public class MovieDAO {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			
 			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
 			conn.setDoOutput(true); // 서버로 받는 값이 있다
 			
 			// 데이터 읽기
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
 			StringBuilder sb = new StringBuilder();
 			String line = null;
 			
@@ -317,5 +394,7 @@ public class MovieDAO {
 		}
 		return res;
 	}
+
+	
 	
 }

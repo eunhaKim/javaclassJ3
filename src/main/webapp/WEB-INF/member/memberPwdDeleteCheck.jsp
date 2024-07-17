@@ -65,7 +65,7 @@
 	          </div>
 	          <div class="col-lg-6 mb-5">
 	              <div class="bg-light p-30 mb-30">
-	                  네이버 카카오톡 구글 로그인...
+	                  <iframe src='https://tv.naver.com/embed/50365435' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='100%' HEIGHT='271px' allowfullscreen></iframe>
 	              </div>
 	          </div>
 	      </div>

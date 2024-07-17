@@ -10,7 +10,8 @@ import javax.servlet.http.HttpSession;
 
 public class Visitor {
 	public static void visitorCount(HttpServletRequest request) throws ServletException, IOException {
-		String visitIp = request.getRemoteAddr();
+		//String visitIp = request.getRemoteAddr();
+		String visitIp = "192.168.50.20";
 		
 		AdminDAO dao = new AdminDAO();
 		int res = 0;

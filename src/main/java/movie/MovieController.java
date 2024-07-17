@@ -43,6 +43,11 @@ public class MovieController extends HttpServlet{
 			command.execute(request, response);
 			viewPage += "/movieList.jsp";
 		}
+		else if(com.equals("/MovieSearchList")) {
+			command = new MovieSearchListCommand();
+			command.execute(request, response);
+			viewPage += "/movieSearchList.jsp";
+		}
 		else if(com.equals("/MovieContent")) {
 			command = new MovieContentCommand();
 			command.execute(request, response);

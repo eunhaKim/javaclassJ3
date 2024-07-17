@@ -100,15 +100,10 @@ public class MemberLoginOkCommand implements MemberInterface {
 		session.setAttribute("strLevel", strLevel);
 		
 		
-		// 로그인후 원래 페이지로 돌아가게 처리
-    String originalURL = request.getParameter("redirect")==null ? "" : request.getParameter("redirect");
-    if (originalURL != null && !originalURL.isEmpty()) {
-      request.setAttribute("message", mid+"님 로그인 되셨습니다.");
-      request.setAttribute("url", originalURL);
-    } else {
-      request.setAttribute("message", mid+"님 로그인 되셨습니다.");
-      request.setAttribute("url", "MemberMain.mem");
-    }
+		
+    request.setAttribute("message", mid+"님 로그인 되셨습니다.");
+    request.setAttribute("url", "MemberMain.mem");
+    
 	}
 
 }

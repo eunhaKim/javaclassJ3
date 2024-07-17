@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Insert</title>
+	<title>boardUpdate.jsp</title>
 	<%@ include file = "/include/bs4.jsp" %>
 	<style>
 		.row{margin-bottom:10px;}
@@ -49,9 +49,9 @@
 	</script>
 </head>
 <body>
-	<%@ include file = "/include/header.jsp" %>
-	<%@ include file = "/include/nav.jsp" %>
-	<!-- Breadcrumb Start -->
+<jsp:include page="/include/header.jsp" />
+<jsp:include page="/include/nav.jsp" />
+<!-- Breadcrumb Start -->
 	<div class="container-fluid">
 	    <div class="row px-xl-5">
 	        <div class="col-12">
@@ -66,11 +66,11 @@
 	<!-- Breadcrumb End -->
 	<!-- Contact Start -->
   <div class="container-fluid">
-    <h2 class="section-title position-relative mx-xl-5 mb-4"><span class="bg-secondary pr-3">게시판 글쓰기(${bName})</span></h2>
+    <h2 class="section-title position-relative mx-xl-5 mb-4"><span class="bg-secondary pr-3">게시물 수정(${bName})</span></h2>
     <div class="row px-xl-5">
       <div class="col-lg-7 mb-5">
         <div class="bg-light p-30">
-        	<form name="myform" method="post" action="BoardInputOk.bo?bName=${bName}" enctype="multipart/form-data" class="was-validated">
+        	<form name="myform" method="post" action="BoardUpdateOk.bo" enctype="multipart/form-data" class="was-validated">
         		<div class="row">
         			<div class="input-group col-xs-12">
 	        			<label for="nickName" class="input-group-addon fhead">글쓴이</label>
@@ -80,7 +80,7 @@
         		<div class="row">
         			<div class="input-group col-xs-12">
 	        			<label for="title" class="input-group-addon fhead">제목</label>
-              	<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요"  
+              	<input type="text" class="form-control" id="title" name="title" value="${vo.title}" autofocus required   
               	required="required" data-validation-required-message="제목을 입력하세요" />
               	<p class="help-block text-danger"></p>
               </div>
@@ -88,27 +88,35 @@
             <div class="row">
         			<div class="input-group col-xs-12">
 	        			<label for="content" class="input-group-addon fhead">글내용</label>
-			        	<textarea name="content" id="content" rows="6" class="form-control"></textarea>
+			        	<textarea name="content" id="content" rows="10" class="form-control">${vo.content}</textarea>
 			        </div>
 			      </div>
 			      <div class="row">
 			      	<label for="listImg" class="input-group-addon fhead">리스트이미지</label>
 						  <input type="file" id="listImg" name="listImg" onchange="imgCheck(this)" class="pt-1" />
 			      </div>
-						<div class="row border-bottom pb-2" id="demoImg1"></div>
+						<div class="row border-bottom pb-2" id="demoImg1">
+							<span class='input-group-addon fhead'>업로드이미지</span>
+							<img src="${ctp}/images/board/${vo.listImgfSName}" alt="현재 리스트 이미지" height="80px"  class='mt-2'>
+						</div>
 						<div class="pt-5 text-center">
-			      	<button type="submit" class="btn btn-primary">글쓰기</button> &nbsp;
+			      	<button type="submit" class="btn btn-primary">글수정</button> &nbsp;
 					    <button type="reset" class="btn btn-secondary">다시작성</button> &nbsp;
 					    <button type="button" class="btn btn-secondary" onclick="location.href='BoardList.bo?bName=${bName}';">목록보기</button>
 			      </div>
-			      <input type="hidden" name="mid" value="${sMid}"/>
-    				<input type="hidden" name="hostIp" value="${pageContext.request.remoteAddr}"/>
+			      <input type="hidden" name="idx" value="${vo.idx}"/>
+			      <input type="hidden" name="bName" value="${bName}"/>
+				    <input type="hidden" name="pag" value="${pag}"/>
+				    <input type="hidden" name="pageSize" value="${pageSize}"/>
+				    <input type="hidden" name="hostIp" value="${pageContext.request.remoteAddr}"/>
+				    <input type="hidden" name="oFileName" value="${vo.listImg}"/>
+				    <input type="hidden" name="fSName" value="${vo.listImgfSName}"/>
         	</form>
         </div>
       </div>
       <div class="col-lg-5 mb-5">
           <div class="bg-light p-30 mb-30">
-              <iframe src='https://tv.naver.com/embed/48465456' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='100%' HEIGHT='400' allowfullscreen></iframe>
+              뭐 넣을까?? ㅎㅎ
           </div>
       </div>
     </div>
